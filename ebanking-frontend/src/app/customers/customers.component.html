@@ -1,1 +1,37 @@
-<p>customers works!</p>
+<div class="container mt-5">
+  @if (customers | async; as listCustomers) {
+    <div class="card">
+      <div class="card-header">Customers</div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th><th>Name</th><th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (c of listCustomers; track c.id) {
+              <tr>
+                <td>{{c.id}}</td>
+                <td>{{c.name}}</td>
+                <td>{{c.email}}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  } @else {
+    @if (errorMessage) {
+      <div class="text-danger mt-3">
+        {{ errorMessage }}
+      </div>
+    } @else {
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="spinner-border text-info" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    }
+  }
+</div>
