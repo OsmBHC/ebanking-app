@@ -4,6 +4,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { AccountDetails } from '../models/account.model';
 import { AccountService } from '../services/account.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class AccountsComponent implements OnInit {
   operationFromGroup!: FormGroup;
   errorMessage!: string ;
 
-  constructor(private fb : FormBuilder, private accountService : AccountService) { }
+  constructor(private fb : FormBuilder, private accountService : AccountService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.accountFormGroup = this.fb.group({

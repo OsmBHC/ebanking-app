@@ -57,6 +57,7 @@
         </div>
       </div>
     </div>
+    @if (authService.roles.includes('ADMIN')) {
     <div class="col col-md-6">
       @if (accountObservable) {
         <div class="card">
@@ -99,5 +100,6 @@
         </div>
       }
     </div>
+  }
   </div>
 </div>

@@ -11,7 +11,7 @@ import { Customer } from '../models/customer.model';
   styleUrl: './new-customer.component.css'
 })
 export class NewCustomerComponent implements OnInit {
-  newCustomerFormGroup! : FormGroup;
+  newCustomerFormGroup!: FormGroup;
 
   constructor(private fb : FormBuilder, private customerService:CustomerService, private router:Router) { }
 
