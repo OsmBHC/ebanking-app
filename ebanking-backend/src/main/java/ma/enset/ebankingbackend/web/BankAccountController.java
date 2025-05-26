@@ -29,6 +29,12 @@ public class BankAccountController {
         return bankAccountService.bankAccountList();
     }
 
+
+    @GetMapping("/accounts/by-customer/{customerId}")
+    public List<BankAccountDTO> getAccountsByCustomer(@PathVariable Long customerId) throws CustomerNotFoundException {
+        return bankAccountService.getAccountsByCustomerId(customerId);
+    }
+
     @GetMapping("/accounts/{accountId}/operations")
     public List<AccountOperationDTO> getHistory(@PathVariable String accountId){
         return bankAccountService.accountHistory(accountId);

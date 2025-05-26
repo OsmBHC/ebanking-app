@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.enset.ebankingbackend.dtos.*;
 import ma.enset.ebankingbackend.entities.*;
+import ma.enset.ebankingbackend.enums.AccountStatus;
 import ma.enset.ebankingbackend.enums.OperationType;
 import ma.enset.ebankingbackend.exceptions.BalanceNotSufficientException;
 import ma.enset.ebankingbackend.exceptions.BankAccountNotFoundException;
@@ -185,5 +186,21 @@ public class BankAccountServiceImpl implements BankAccountService {
         accountHistoryDTO.setPageSize(size);
         accountHistoryDTO.setTotalPages(accountOperations.getTotalPages());
         return accountHistoryDTO;
+    }
+
+    @Override
+    public List<BankAccountDTO> getAccountsByCustomerId(Long customerId) throws CustomerNotFoundException {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
+        List<BankAccount> bankAccounts = bankAccountRepository.findByCustomerId(customerId);
+        return bankAccounts.stream().map(account -> {
+            if (account instanceof SavingAccount) {
+                return dtoMapper.fromSavingAccount((SavingAccount) account);
+            } else if (account instanceof CurrentAccount) {
+                return dtoMapper.fromCurrentAccount((CurrentAccount) account);
+            } else {
+                throw new RuntimeException("Unknown account type");
+            }
+        }).collect(Collectors.toList());
     }
 }
