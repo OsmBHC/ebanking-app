@@ -8,11 +8,13 @@ import { AdminTemplateComponent } from './admin-template/admin-template.componen
 import { authenticationGuard } from './guards/authentication.guard';
 import { authorizationGuard } from './guards/authorization.guard';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
     { path: "login", component: LoginComponent },
     { path: "", redirectTo: "/login", pathMatch: "full" },
     { path: "admin", component: AdminTemplateComponent, canActivate: [authenticationGuard], children: [
+        { path: "", component: HomeComponent },
         { path: "customers", component: CustomersComponent },
         { path: "new-customer", component: NewCustomerComponent, canActivate: [authorizationGuard], data: {role: "ADMIN"} },
         { path: "accounts", component: AccountsComponent },

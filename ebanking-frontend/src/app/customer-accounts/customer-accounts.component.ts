@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '../models/customer.model';
 import { CommonModule } from '@angular/common';
@@ -19,6 +19,7 @@ export class CustomerAccountsComponent implements OnInit {
   accountDetails: { [key: string]: AccountDetails } = {};
   errorMessage: string | null = null;
   loading: boolean = false;
+  expandedAccounts: Set<string> = new Set();
 
   constructor(
     private route: ActivatedRoute,
@@ -33,19 +34,30 @@ export class CustomerAccountsComponent implements OnInit {
     this.loadAccounts();
   }
 
+
   loadAccounts(): void {
     this.loading = true;
     this.accountService.getAccountsByCustomerId(+this.customerId).subscribe({
       next: (accounts) => {
         this.accounts = accounts;
         this.loading = false;
-        this.accounts.forEach(account => this.loadAccountDetails(account.id));
       },
       error: (err) => {
         this.errorMessage = 'Failed to load accounts: ' + err.message;
         this.loading = false;
       }
     });
+  }
+
+  toggleOperations(accountId: string): void {
+    if (this.expandedAccounts.has(accountId)) {
+      this.expandedAccounts.delete(accountId);
+    } else {
+      this.expandedAccounts.add(accountId);
+      if (!this.accountDetails[accountId]) {
+        this.loadAccountDetails(accountId);
+      }
+    }
   }
 
   loadAccountDetails(accountId: string): void {
@@ -60,6 +72,6 @@ export class CustomerAccountsComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/admin/customers']);
+    this.router.navigateByUrl('/admin/customers');
   }
 }
