@@ -5,6 +5,13 @@
 - [Features](#features)
   - [Backend (`ebanking-backend`)](#backend-ebanking-backend)
   - [Frontend (`ebanking-frontend`)](#frontend-ebanking-frontend)
+- [App Pages](#app-pages)
+  - [Login](#login)
+  - [Home](#home)
+  - [Accounts](#accounts)
+  - [Customers](#customers)
+  - [Customer Account Details](#customer-account-details)
+  - [New Customer](#new-customer)
 - [Technologies](#technologies)
   - [Backend](#backend)
   - [Frontend](#frontend)
@@ -59,6 +66,45 @@ The E-Banking Application is a full-stack web application designed to manage cus
   - Responsive navbar for navigation.
   - Admin template for layout consistency.
   - Bootstrap 5 for styling, with Bootstrap Icons for visual elements.
+
+## App Pages
+Below are screenshots of the key interfaces in the E-Banking Application, showcasing the user experience for both Admin and User roles. Each interface includes a description and its purpose.
+### Login
+![Login Page](screenshots/login.png)
+- **Description**: The Login page features a clean, centered form with fields for username and password, styled with a modern gradient background and a security-themed icon. It includes input validation and error messages for incorrect credentials.
+- **Purpose**: This page is the entry point for both Admin and User roles, allowing secure authentication to access the banking dashboard. It ensures only authorized users can proceed, providing a seamless and secure login experience.
+
+### Home
+![Home Page](screenshots/home.png)
+- **Description**: The Home page displays a full-screen hero section with a bold headline, a motivational tagline, and a prominent call-to-action button. It uses a gradient background and a semi-transparent card for a modern look, accessible to both Admin and User roles.
+- **Purpose**: This page welcomes users after login, serving as a central hub to navigate to other features like customer or account management. It sets a professional tone and encourages users to explore the application’s functionalities.
+
+### Accounts
+*Admin*
+![Accounts Page for Admin](screenshots/accounts-admin.png)
+*User*
+![Accounts Page for User](screenshots/accounts-user.png)
+- **Description**: The Accounts page provides a form to search for accounts by ID, displaying the account’s balance and a paginated transaction history in a responsive table. Admins see additional controls for debit, credit, and transfer operations, while Users see only view-only details.
+- **Purpose**: This page enables efficient account monitoring and management. For Users, it offers transparency into account details, while for Admins, it provides powerful tools to perform financial operations, ensuring operational control and oversight.
+
+### Customers
+*Admin*
+![Customers Page for Admin](screenshots/customers-admin.png)
+*User*
+![Customers Page for User](screenshots/customers-user.png)
+- **Description**: The Customers page lists all customers in a table with their ID, name, and email, supporting keyword search. Users can view account details by clicking on a customer, while Admins can also delete customers with a confirmation prompt.
+- **Purpose**: This page streamlines customer management by providing a clear overview of customer data. It allows Users to access account details for review, while Admins gain the ability to manage customer records, ensuring data accuracy and control.
+
+### Customer Account Details
+![Customers Page](screenshots/customer-account.png)
+- **Description**: The Customer Account Details page displays a specific customer’s profile, including their ID, name, email, and a table of their associated bank accounts with balances and transaction histories. It uses a clean, centered card layout with Bootstrap styling, and Admins see options to manage accounts, while Users see view-only details.
+- **Purpose**: This page provides a detailed view of a customer’s financial activity, enabling Users to monitor account statuses and Admins to oversee and manage customer accounts efficiently, supporting informed decision-making and customer service.
+
+### New Customer
+*Admin*
+![New Customer Page](screenshots/new-customer.png)
+- **Description**: The New Customer page, accessible only to Admins, features a form to add a new customer with fields for name and email, including validation to ensure correct input. It is styled consistently with other pages, using a centered card layout.
+- **Purpose**: This page empowers Admins to expand the customer base by adding new clients efficiently. It ensures data integrity through validation and supports business growth by facilitating customer onboarding.
 
 ## Technologies
 ### Backend
@@ -216,10 +262,12 @@ ebanking-frontend/
 │   │   ├── admin-template/                      # Admin layout component
 │   │   │   ├── admin-template.component.css
 │   │   │   ├── admin-template.component.html
-│   │   │   ├── admin-template.component.spec.ts
+│   │ TCP, #image
 │   │   │   └── admin-template.component.ts
-│   │   ├── customer-accounts/                   # Customer accounts component
-│   │   │   ├── customer-accounts.component.css
+│   │   ├── customer-accounts!                   # Customer accounts component
+│   │   │   ├── accounts/
+│   │   │   ├── components/
+│   │   │   │   ├── customer-accounts.component.css
 │   │   │   ├── customer-accounts.component.html
 │   │   │   ├── customer-accounts.component.spec.ts
 │   │   │   └── customer-accounts.component.ts
@@ -234,9 +282,9 @@ ebanking-frontend/
 │   │   │   ├── authorization.guard.spec.ts
 │   │   │   └── authorization.guard.ts
 │   │   ├── interceptors/                        # HTTP interceptors
-│   │   │   ├── app-http.interceptor.spec.ts
+│   │   │   ├── app-http.interceptor.service.ts
 │   │   │   └── app-http.interceptor.ts
-│   │   ├── login/                               # Login component
+│   │   ├── login/                             # Login component
 │   │   │   ├── login.component.css
 │   │   │   ├── login.component.html
 │   │   │   ├── login.component.spec.ts
@@ -244,22 +292,22 @@ ebanking-frontend/
 │   │   ├── models/                              # Data models
 │   │   │   ├── account.model.ts
 │   │   │   └── customer.model.ts
-│   │   ├── navbar/                              # Navigation bar component
-│   │   │   ├── navbar.component.css
+│   │   ├── navbar/                            # Navigation bar component
+│   │   │   ├── navbar.component.css.html
 │   │   │   ├── navbar.component.html
 │   │   │   ├── navbar.component.spec.ts
 │   │   │   └── navbar.component.ts
-│   │   ├── new-customer/                        # New customer form component
-│   │   │   ├── new-customer.component.css
+│   │   │   ├── new-customer/                        # New customer form component
+│   │   │   ├── new-customer.component.css.html
 │   │   │   ├── new-customer.component.html
 │   │   │   ├── new-customer.component.spec.ts
 │   │   │   └── new-customer.component.ts
 │   │   ├── not-authorized/                      # Unauthorized access component
 │   │   │   ├── not-authorized.component.css
 │   │   │   ├── not-authorized.component.html
-│   │   │   ├── not-authorized.component.spec.ts
+│   │   │   ├── not-authorized.component.ts.ts
 │   │   │   └── not-authorized.component.ts
-│   │   ├── services/                            # Services for API communication
+│   │   ├── services/                          # Services for API communication
 │   │   │   ├── account.service.spec.ts
 │   │   │   ├── account.service.ts
 │   │   │   ├── auth.service.spec.ts
@@ -267,24 +315,25 @@ ebanking-frontend/
 │   │   │   ├── customer.service.spec.ts
 │   │   │   └── customer.service.ts
 │   │   ├── app.component.css                    # Root component styles
-│   │   ├── app.component.html                   # Root component template
-│   │   ├── app.component.spec.ts                # Root component tests
-│   │   ├── app.component.ts                     # Root component logic
-│   │   ├── app.config.ts                        # Application configuration
-│   │   └── app.routes.ts                        # Routing configuration
+│   │   ├── app.component.html                   # HTML for root component
+│   │DEDOWN ├── app.component.html
+│          ├── app.component.spec.ts                # Tests for root component
+│   │   ├── app.component.ts                     # Logic for root component
+│   │   ├── app.config.ts                      # Configuration for the app
+│   │   └── app.routes.ts                        # Routes configuration for the app
 │   ├── environments/                            # Environment configuration
 │   │   └── environment.ts
 │   ├── index.html                               # Main HTML file
-│   ├── main.ts                                  # Application bootstrap
+│   ├── main.ts                                  # Bootstrap file for the application
 │   └── styles.css                               # Global styles
 ├── public/
-│   └── favicon.ico                              # Favicon
-├── angular.json                                 # Angular configuration
-├── package.json                                 # Node.js dependencies
-├── package-lock.json                            # Dependency lock file
-├── tsconfig.app.json                            # TypeScript app config
-├── tsconfig.json                                # TypeScript config
-└── tsconfig.spec.json                           # TypeScript test config
+│   └── favicon.ico                              # Favicon for the application
+├── angular.json                                 # Angular CLI configuration
+├── package.json                                # Node.js dependencies
+├── package-lock.json                               # Dependency lock file
+├── tsconfig.app.json                               # TypeScript configuration for the app
+├── tsconfig.json                                # TypeScript configuration
+└── tsconfig.spec.json                           # TypeScript configuration for tests
 ```
 
 ## Development Journey
@@ -292,45 +341,40 @@ ebanking-frontend/
    - Created `ebanking-backend` with Spring Boot for REST APIs.
    - Initialized `ebanking-frontend` with Angular 19 (`ng new ebanking-frontend`).
 2. **Customer Management**:
-   - Implemented backend APIs for CRUD operations on customers.
-   - Built frontend components to list, search, add, and delete customers.
-3. **Account Management**:
-   - Added backend APIs for account history and operations (debit, credit, transfer).
-   - Created frontend components to search accounts, display transactions, and perform operations with pagination.
-4. **Security**:
-   - Configured JWT authentication in the backend with `SecurityConfig` and `SecurityController`.
-   - Added frontend authentication with login, logout, interceptors, guards, and not-authorized handling.
-5. **UI Enhancements**:
-   - Integrated Bootstrap for responsive design.
-   - Added navbar and admin template for consistent navigation.
-6. **Documentation**:
-   - Added a comprehensive README with setup, usage, and project details.
-7. **Commits**:
-   - Regularly committed changes to GitHub with clear messages (e.g., initial setup, component additions, security implementation).
+   - Implemented backend APIs for customer CRUD operations.
+   - Built frontend components to list, manage customers, add, manage customers, and delete customers.
+   - Added backend APIs for account history, transactions, and operations (debit, credit, transfer).
+   - Created components in the frontend to search accounts, manage transactions, view transactions, manage account history, and perform operations with pagination.
+   - Configured JWT-based authentication in the backend with `SecurityConfig` and configured `SecurityController`.
+   - Added frontend authentication with login, implemented logout, logout functionality, implemented interceptors, implemented guards, and, and handled unauthorized access handling.
+   - Integrated Bootstrap 5 for a responsive UI design.
+   - Added a navbar and admin template for consistent navigation consistency.
+   - Added a comprehensive README with setup instructions, usage, and project details, and documentation.
+   - Regularly committed changes to the GitHub repository with clear messages (e.g., initial setup, component additions, security implementation).
 
 ## Future Improvements
 - **Enhanced Customer Management**:
-  - Add input, edit, and advanced search functionalities for customers to improve usability and data management.
+  - Add input fields for **edit/update** functionality, **edit** functionality, and **advanced search** capabilities for customers to enhance usability and data management.
 - **Enhanced Account Management**:
-  - Implement account creation, detailed search, and comprehensive account administration features.
+   - Implement **account creation**, **create accounts**, **edit account** functionality, **and **detailed search** features for accounts to improve account administration.
 - **Operation Tracking**:
-  - Record the authenticated user’s identifier for every customer, account, and operation creation or modification to ensure traceability.
+  - Record the **authenticated user’s identifier** for every **customer**, **account**, **and**, and **operation** creation or modification to ensure **traceability**.
 - **User Account and Password Management**:
-  - Enable user account management, including password change functionality, to enhance security and user control.
+   - Enable **user account management**, including **password management** functionality (e.g., password change functionality), to enhance **security** and **user control**.
 - **Dashboard with ChartJS**:
-  - Develop a dashboard using ChartJS (ng2-charts) to display graphs and statistics (e.g., account balances, transaction trends) for informed decision-making.
+   - Develop a **dashboard** using **ChartJS** (via `ng2-charts`) to display **graphs** and **statistics** (e.g., account balances, transaction trends) for **informed decision-making**.
 - **Additional Features**:
-  - Explore other functionalities, such as transaction categorization, multi-currency support, or email notifications for operations.
+   - Explore **additional functionalities** like **transaction categorization**, **multi-currency support**, or **email notifications** for operations **for** **enhanced financial operations**.
 - **Database Integration**:
-  - Replace the in-memory user store with a persistent database (e.g., MySQL) for robust user and data management.
+   - Replace the **in-memory** user store with **a** **persistent database** (e.g., **MySQL**) for **robust user and data management**.
 - **UI/UX Enhancements**:
-  - Implement role-based UI restrictions (e.g., admin-only views) and user feedback mechanisms (e.g., toast notifications).
+   - Implement **role-based UI** restrictions (e.g., admin-only views for admin-only actions) and **user feedback** enhancements (e.g., **toast notifications**) for **improved user experience**.
 - **Deployment**:
-  - Deploy the application to a cloud platform (e.g., AWS, Heroku) for production use.
+   - Deploy the **application** to **a** **cloud platform** like (e.g., **AWS**, **Heroku**) for **production use**.
 
 ## Contributing
 1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/YourFeature`).
-3. Commit changes (`git commit -m 'Add YourFeature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Open a pull request.
+2. Create a **feature** branch (**e.g.,** `git checkout -b feature/YourFeature`**).
+3. **Commit** your **changes (**e.g.,** `git commit -m 'feat: add YourFeature'`**).
+4. **Push** your changes to the branch (**e.g., `git push origin feature/YourFeature**).
+5. **Open** a **pull request**.
